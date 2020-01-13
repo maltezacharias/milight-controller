@@ -18,7 +18,7 @@ services:
     restart: always
 
   milight-bridge:
-    image: milight-client
+    image: maltezacharias/milight-habridge
     container_name: milight-bridge
     networks:
       - internal

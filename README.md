@@ -14,7 +14,7 @@ While using tcpdump I discovered regular traffic to a chinese server (probably j
 
 ## Build Docker Image
 
-Prepare the docker image:
+Prepare the docker image (or just use the maltezacharias/milight-habridge from Docker Hub):
 
 ```
 $ docker build -t milight-client .
@@ -43,7 +43,7 @@ services:
     restart: always
 
   milight-bridge:
-    image: milight-client
+    image: maltezacharias/milight-habridge
     container_name: milight-bridge
     networks:
       - internal
@@ -66,52 +66,6 @@ networks:
 ### Example setup:
 
 ```
-$ docker build -t milight-client .
-Sending build context to Docker daemon  271.9kB
-Step 1/7 : FROM node:lts
- ---> 7a73e56f893c
-Step 2/7 : COPY app /app
- ---> 9c129c5f66ca
-Step 3/7 : WORKDIR /app
- ---> Running in 1d485298d829
-Removing intermediate container 1d485298d829
- ---> 111c6d424e0a
-Step 4/7 : RUN npm install
- ---> Running in ec905e21746a
-
-> nodemon@2.0.2 postinstall /app/node_modules/nodemon
-> node bin/postinstall || exit 0
-
-Love nodemon? You can now support the project via the open collective:
- > https://opencollective.com/nodemon/donate
-
-npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.1.2 (node_modules/fsevents):
-npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.1.2: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
-
-added 157 packages from 84 contributors and audited 277 packages in 16.628s
-
-1 package is looking for funding
-  run `npm fund` for details
-
-found 0 vulnerabilities
-
-Removing intermediate container ec905e21746a
- ---> 95237c01ba20
-Step 5/7 : ENV DEBUG=milight-controller:server
- ---> Running in d65e5b62e789
-Removing intermediate container d65e5b62e789
- ---> 70364c527eeb
-Step 6/7 : CMD node bin/www
- ---> Running in 33c71662dbb9
-Removing intermediate container 33c71662dbb9
- ---> f2f379069184
-Step 7/7 : EXPOSE 3000
- ---> Running in ce153c276009
-Removing intermediate container ce153c276009
- ---> 805365986d3b
-Successfully built 805365986d3b
-Successfully tagged milight-client:latest
-
 $ cd milight-habridge/
 $ nano docker-compose.yaml # Adjust secret
 $ docker-compose up
