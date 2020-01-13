@@ -1,8 +1,8 @@
 FROM node:lts
+
+COPY app /app
 WORKDIR /app
-COPY package.json /app
 RUN npm install
-COPY . /app
 
 ENV DEBUG=milight-controller:server
 CMD node bin/www
