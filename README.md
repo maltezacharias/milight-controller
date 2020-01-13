@@ -236,7 +236,7 @@ ea479215afda        milight-habridge_internal   bridge              local
 
 The URL used is:
 
-http://milight-bridge:3000/v6/white/<bridge-ip>/<zone>/<brightness>
+```http://milight-bridge:3000/v6/white/<bridge-ip>/<zone>/<brightness>```
 
 Parameter  | Values
 ---------- | ------
