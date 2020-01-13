@@ -1,0 +1,38 @@
+# Sample docker-compose file to combine habridge and milight-bridge
+---
+version: "2"
+services:
+  habridge:
+    image: linuxserver/habridge # see linuxserver/habridge documentation
+    container_name: habridge
+    networks:
+      - main
+      - internal
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - SEC_KEY=<ENTER-KEY>
+      - TZ=Europe/London
+    volumes:
+      - /srv/habridge/docker:/config
+    restart: always
+
+  milight-bridge:
+    image: milight-client
+    container_name: milight-bridge
+    networks:
+      - internal
+    restart: always
+
+networks:
+  internal:
+    driver: bridge
+  main:
+    driver: macvlan
+    driver_opts:
+      parent: br0
+    ipam:
+      config:
+        - subnet: 10.11.10.0/24
+          ip_range: 10.11.10.128/27
+          gateway: 10.11.10.1
